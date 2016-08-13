@@ -15,7 +15,7 @@ import static sample.Main.order;
 class Client extends Thread {
 
     SampleController sp;
-    boolean alive = true;
+
 
     Client(SampleController _sp)
     {
@@ -56,7 +56,7 @@ class Client extends Thread {
                 e.printStackTrace();
             }
             while (true) {
-                while (alive) {
+                while (sp.alive) {
                     switch (rand.nextInt(3)) {
                         case 0:
                             this.orderHamburger(order);

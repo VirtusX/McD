@@ -16,22 +16,32 @@ public class SampleController {
     public Label CooksEvent;
     public Label Hello;
     public Button takeStats;
+    public Button auto;
+    public Label action1;
+    boolean alive = true;
+    private boolean automate = false;
     private Cook doCook1 = new Cook(this, "баба Люся");
     private Cook doCook2 = new Cook(this, "Павло Зібров");
     private Client doOrder1 = new Client(this);
     private Client doOrder2 = new Client(this);
     private Client doOrder3 = new Client(this);
-    private Cashier doCash = new Cashier(this);
+    private Cashier doCash1 = new Cashier(this, 1);
+    private Cashier doCash2 = new Cashier(this, 2);
     private boolean Pause = false;
     private String returnOrder = null;
+    int i = 0;
+    int money = 0;
 
     public void orderAction(ActionEvent actionEvent) {
-        doCash.run();
+        doCash1.Manual();
         takeStats.setVisible(true);
+        auto.setVisible(false);
     }
 
     public void start(ActionEvent actionEvent) throws InterruptedException {
-        action.setText("Починай вже працювати, лінива задниця");
+        action.setText("То ти будеш вже працювать, чи тіки байдики бити?");
+        action1.setText("Тіки підожди, коли хоча б трохи жрачки вже буде зроблено...");
+        auto.setVisible(true);
         Hello.setVisible(false);
         Start.setVisible(false);
         takeOrders.setVisible(true);
@@ -45,27 +55,36 @@ public class SampleController {
     public void Stats(ActionEvent actionEvent) throws InterruptedException {
         if (Pause) {
             takeStats.setText("Підрахуй");
-            action.setText(returnOrder);
+            if (!automate) {
+                action.setText(returnOrder);
+            }
+            else {
+            action.setText("Воно повинно працювати");
+            action1.setText("Але хєр знає, чому ні");}
             Pause = false;
             takeOrders.setDisable(false);
-            doCook1.alive = true;
-            doCook2.alive = true;
-            doOrder1.alive = true;
-            doOrder2.alive = true;
-            doOrder3.alive = true;
+            alive = true;
         }
         else  {
             returnOrder = action.getText();
-            action.setText("Оброблено замовлень: " + doCash.i + ", зароблено бабок: " + doCash.money + " гривень");
+            action.setText("Оброблено замовлень: " + i + ", зароблено бабок: " + money + " гривень");
+            if(automate) {
+                action1.setText("А скільки за день пороблено хавки я навіть не збираюсь рахувати");
+            }
             Pause = true;
             takeStats.setText("Продовжити працювати");
             takeOrders.setDisable(true);
-            doCook1.alive = false;
-            doCook2.alive = false;
-            doOrder1.alive = false;
-            doOrder2.alive = false;
-            doOrder3.alive = false;
+            alive = false;
         }
 
+    }
+
+    public void auto(ActionEvent actionEvent) {
+        takeOrders.setVisible(false);
+        takeStats.setVisible(true);
+        auto.setVisible(false);
+        doCash1.start();
+        doCash2.start();
+        automate = true;
     }
 }

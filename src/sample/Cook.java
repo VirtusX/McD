@@ -17,7 +17,7 @@ class Cook extends Thread {
     private final Lock lock = new ReentrantLock();
     SampleController sp;
     String Name;
-    boolean alive = true;
+
 
     public Cook(SampleController _sp, String i) {
         sp = _sp;
@@ -49,8 +49,8 @@ class Cook extends Thread {
             e.printStackTrace();
         }
         while (true) {
-            while (alive) {
-                while (Cooking.size() < 30) {
+            while (sp.alive) {
+                while (Cooking.size() < 30 && sp.alive) {
                     int n = 0;
                     while (n < 9) {
                         for (int i = 0; i < 3; i++) {
