@@ -20,8 +20,8 @@ public class SampleController {
     public Label action1;
     boolean alive = true;
     private boolean automate = false;
-    private Cook doCook1 = new Cook(this, "баба Люся");
-    private Cook doCook2 = new Cook(this, "Павло Зібров");
+    private Cook doCook1 = new Cook(this, "баба Люся",1);
+    private Cook doCook2 = new Cook(this, "Павло Зібров",2);
     private Client doOrder1 = new Client(this);
     private Client doOrder2 = new Client(this);
     private Client doOrder3 = new Client(this);
@@ -36,6 +36,7 @@ public class SampleController {
         doCash1.Manual();
         takeStats.setVisible(true);
         auto.setVisible(false);
+        action1.setText("Тіки не клацай дюже швидко, бо ти ж не супермен, щоб кожну секунду когось нахуй посилати");
     }
 
     public void start(ActionEvent actionEvent) throws InterruptedException {
@@ -58,9 +59,6 @@ public class SampleController {
             if (!automate) {
                 action.setText(returnOrder);
             }
-            else {
-            action.setText("Воно повинно працювати");
-            action1.setText("Але хєр знає, чому ні");}
             Pause = false;
             takeOrders.setDisable(false);
             alive = true;
