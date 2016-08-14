@@ -27,8 +27,10 @@ public class Cashier extends Thread {
 
     public synchronized String Manual() {
         while (order.isEmpty() || Cooking.isEmpty()) {
+            sp.action.setText("Чи ти кудись спішиш?");
         }
         while (!Cooking.contains(order.get(0))) {
+            sp.action.setText("Заказ ще не приготували, не зли мене!");
         }
         sp.i++;
         String ordered = order.get(0);
@@ -58,11 +60,11 @@ public class Cashier extends Thread {
     }
 
     public void run() {
-        while (true) {
+        while (!currentThread().isInterrupted()) {
             System.out.print("Cashier" + this.toString()+ "alive is " + sp.alive+"\n");
             while (sp.alive) {
                 try {
-                    Thread.sleep(nomer*2000);
+                    sleep(nomer*2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -103,17 +105,22 @@ public class Cashier extends Thread {
                         sp.money += price;
                     });
                     try {
-                        Thread.sleep(5000);
+                        sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
             try {
-                Thread.sleep(300);
+                sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            Thread.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

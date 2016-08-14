@@ -66,12 +66,12 @@ class Client extends Thread {
     }
 
         public void run() {
-            while (true) {
-                System.out.print("Client" + this.toString()+ "alive is " + sp.alive+"\n");
+            while (!currentThread().isInterrupted()) {
+                System.out.print("Client" + this.toString() + "alive is " + sp.alive + "\n");
                 while (sp.alive) {
                     Random rand = new Random();
                     try {
-                        Thread.sleep((rand.nextInt(3))*1000);
+                        Thread.sleep((rand.nextInt(3)) * 1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -111,6 +111,11 @@ class Client extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }
+            try {
+                Thread.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 }

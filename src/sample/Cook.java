@@ -53,7 +53,7 @@ class Cook extends Thread {
     @Override
     public void run() {
         int n = 0;
-        while (true) {
+        while (!currentThread().isInterrupted()) {
             //System.out.print("Cook" + this.toString()+ "alive is " + sp.alive+"\n");
             while (sp.alive) {
                 try {
@@ -183,6 +183,11 @@ class Cook extends Thread {
                         }
                     }
                 }
+            }
+            try {
+                Thread.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
