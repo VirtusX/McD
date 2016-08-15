@@ -8,33 +8,30 @@ import java.util.concurrent.locks.ReentrantLock;
 import static sample.Main.Cooking;
 import static sample.Main.order;
 
-/**
- * Created by x-13 on 10.08.2016.
- */
-public class Cashier extends Thread {
+class Cashier extends Thread {
 
 
-    SampleController sp;
+    private SampleController sp;
 
     private int nomer = 0;
     private final Lock lock = new ReentrantLock();
-    public Cashier(SampleController _sp, int num)
+    Cashier(SampleController _sp, int num)
     {
         sp = _sp;
         nomer = num;
     }
 
 
-    public synchronized String Manual() {
-        while (order.isEmpty() || Cooking.isEmpty()) {
-            sp.action.setText("Чи ти кудись спішиш?");
-        }
-        while (!Cooking.contains(order.get(0))) {
-            sp.action.setText("Заказ ще не приготували, не зли мене!");
-        }
+    synchronized String Manual() throws InterruptedException {
+        Platform.runLater(() -> {
+            if (lock.tryLock()) {while (order.isEmpty() || Cooking.isEmpty()) {
+            sp.action.setText("Чи ти кудись спішиш?");}
+            while (!Cooking.contains(order.get(0))) {
+            sp.action.setText("Заказ ще не зготували, не зли мене!");}
+        }});
         sp.i++;
         String ordered = order.get(0);
-        double price = 00;
+        double price = 0;
         switch (ordered){
             case "гамбургер":
                 price = 10.00;
@@ -76,7 +73,7 @@ public class Cashier extends Thread {
                     sp.i++;
                     Platform.runLater(() -> {
                         String ordered = order.get(0);
-                        double price = 00;
+                        double price = 0;
                         switch (ordered) {
                             case "гамбургер":
                                 price = 10.00;

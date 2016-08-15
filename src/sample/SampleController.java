@@ -27,12 +27,14 @@ public class SampleController {
     private Client doOrder3 = new Client(this);
     private Cashier doCash1 = new Cashier(this, 1);
     private Cashier doCash2 = new Cashier(this, 2);
+
     private boolean Pause = false;
     private String returnOrder = null;
+
     int i = 0;
     int money = 0;
 
-    public void orderAction(ActionEvent actionEvent) {
+    public void orderAction(ActionEvent actionEvent) throws InterruptedException {
         doCash1.Manual();
         takeStats.setVisible(true);
         auto.setVisible(false);

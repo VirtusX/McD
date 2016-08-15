@@ -9,12 +9,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static sample.Main.order;
 
-/**
- * Created by x-13 on 10.08.2016.
- */
 class Client extends Thread {
 
-    SampleController sp;
+    private SampleController sp;
 
 
     Client(SampleController _sp)
@@ -100,7 +97,7 @@ class Client extends Thread {
                                 sp.OrdersQueue.setText("В черзі вже хєрова туча заказів!\n Їх вже аж " + order.size() + "! Ану піздуй працювать!");
                         });
                         try {
-                            Thread.sleep(4000);
+                            Thread.sleep(7000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
