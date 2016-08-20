@@ -27,32 +27,32 @@ class Cashier extends Thread {
         Thread.sleep(300);
         Platform.runLater(() -> {
             if (lock.tryLock()) {while (order.isEmpty() || Cooking.isEmpty()) {
-            sp.action.setText("Чи ти кудись спішиш?");}
-            while (!Cooking.contains(order.get(0))) {
-            sp.action.setText("Заказ ще не зготували, не зли мене!");}
-        }});
+                sp.action.setText("Wait for orders!");}
+                while (!Cooking.contains(order.get(0))) {
+                    sp.action.setText("We have not cooked it yet!");}
+            }});
         if (lock.tryLock())
-        sp.i++;
+            sp.i++;
         String ordered = order.get(0);
         double price = 0;
         switch (ordered){
-            case "гамбургер":
+            case "hamburger":
                 price = 10.00;
                 break;
-            case "чізбургер":
+            case "cheeseburger":
                 price = 12.00;
                 break;
-            case "картопля фрі":
+            case "french fries":
                 price = 9.00;
                 break;
-            case "макНагетси":
+            case "mcNuggets":
                 price = 11.00;
                 break;
-            case "мафін":
+            case "muffin":
                 price = 20.00;
                 break;
         }
-        sp.action.setText("Замовлення №" + sp.i + ", " + ordered + ", виконано.\n З вас " + price + " гривень. Ідіть нахуй");
+        sp.action.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " $. Have a nice day");
         Cooking.remove(order.get(0));
         order.remove(0);
         sp.money+=price;
@@ -78,26 +78,26 @@ class Cashier extends Thread {
                         String ordered = order.get(0);
                         double price = 0;
                         switch (ordered) {
-                            case "гамбургер":
+                            case "hamburger":
                                 price = 10.00;
                                 break;
-                            case "чізбургер":
+                            case "cheeseburger":
                                 price = 12.00;
                                 break;
-                            case "картопля фрі":
+                            case "french fries":
                                 price = 9.00;
                                 break;
-                            case "макНагетси":
+                            case "mcNuggets":
                                 price = 11.00;
                                 break;
-                            case "мафін":
+                            case "muffin":
                                 price = 20.00;
                                 break;
                         }
                         if (nomer == 1)
-                            sp.action.setText("Замовлення №" + sp.i + ", " + ordered + ", виконано.\n З вас " + price + " гривень. Ідіть нахуй");
+                            sp.action.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " uah. Have a nice day");
                         else
-                            sp.action1.setText("Замовлення №" + sp.i + ", " + ordered + ", виконано.\n З вас " + price + " гривень. Ідіть нахуй");
+                            sp.action1.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " uah. Have a nice day");
                         if (lock.tryLock()) {
                             Cooking.remove(order.get(0));
                             order.remove(0);

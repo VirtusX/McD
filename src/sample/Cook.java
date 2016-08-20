@@ -22,28 +22,28 @@ class Cook extends Thread {
 
     private void doHamburger(List<String> i) {
         if (lock.tryLock()) {
-            i.add("гамбургер");
+            i.add("hamburger");
         }
     }
 
     private void doSandwich(List<String> i) {
         if (lock.tryLock())
-            i.add("чізбургер");
+            i.add("cheeseburger");
     }
 
     private void doFry(List<String> i) {
         if (lock.tryLock())
-            i.add("картопля фрі");
+            i.add("french fries");
     }
 
     private void doNuggets(List<String> i) {
         if (lock.tryLock())
-            i.add("макНагетси");
+            i.add("mcNuggets");
     }
 
     private void doMuffin(List<String> i) {
         if (lock.tryLock())
-            i.add("мафін");
+            i.add("muffin");
     }
 
     @Override
@@ -67,7 +67,7 @@ class Cook extends Thread {
                                     this.doHamburger(Cooking);
                                     n++;
                                     System.out.print(Name+" "+n+"\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Хавки зроблено: " + Cooking.size()));
+                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
                                     try {
                                         Thread.sleep(3000);
                                     } catch (InterruptedException e) {
@@ -75,12 +75,12 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " повернулась"));
+                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
                                         n = 0;
                                     }
                                     break;
@@ -88,7 +88,7 @@ class Cook extends Thread {
                                     this.doFry(Cooking);
                                     n++;
                                     System.out.print(Name+" "+n+"\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Хавки зроблено: " + Cooking.size()));
+                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
                                     try {
                                         Thread.sleep(3000);
                                     } catch (InterruptedException e) {
@@ -96,12 +96,12 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " повернулась"));
+                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
                                         n = 0;
                                     }
                                     break;
@@ -116,7 +116,7 @@ class Cook extends Thread {
                                     this.doSandwich(Cooking);
                                     n++;
                                     System.out.print(Name + " " + n + "\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Хавки зроблено: " + Cooking.size()));
+                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
                                     try {
                                         Thread.sleep(3000);
                                     } catch (InterruptedException e) {
@@ -124,12 +124,12 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " повернулась"));
+                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
                                         n = 0;
                                     }
                                     break;
@@ -137,7 +137,7 @@ class Cook extends Thread {
                                     this.doNuggets(Cooking);
                                     n++;
                                     System.out.print(Name + " " + n + "\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Хавки зроблено: " + Cooking.size()));
+                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
                                     try {
                                         Thread.sleep(3000);
                                     } catch (InterruptedException e) {
@@ -145,12 +145,12 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " повернулась"));
+                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
                                         n = 0;
                                     }
                                     break;
@@ -158,7 +158,7 @@ class Cook extends Thread {
                                     this.doMuffin(Cooking);
                                     n++;
                                     System.out.print(Name + " " + n + "\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Хавки зроблено: " + Cooking.size()));
+                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
                                     try {
                                         Thread.sleep(3000);
                                     } catch (InterruptedException e) {
@@ -166,12 +166,12 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " повернулась"));
+                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
                                         n = 0;
                                     }
                                     break;

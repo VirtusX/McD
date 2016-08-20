@@ -20,8 +20,8 @@ public class SampleController {
     public Label action1;
     boolean alive = true;
     private boolean automate = false;
-    private Cook doCook1 = new Cook(this, "баба Люся",1);
-    private Cook doCook2 = new Cook(this, "Павло Зібров",2);
+    private Cook doCook1 = new Cook(this, "Cook №1",1);
+    private Cook doCook2 = new Cook(this, "Cook №2",2);
     private Client doOrder1 = new Client(this);
     private Client doOrder2 = new Client(this);
     private Client doOrder3 = new Client(this);
@@ -34,13 +34,14 @@ public class SampleController {
     int money = 0;
 
     public void orderAction(ActionEvent actionEvent) throws InterruptedException {
+        takeOrders.setText("Take order");
         doCash1.Manual();
         takeStats.setVisible(true);
         auto.setVisible(false);
     }
 
     public void start(ActionEvent actionEvent) throws InterruptedException {
-        action.setText("То ти будеш вже працювать, чи тіки байдики бити?");
+        action.setText("Choose your path");
         auto.setVisible(true);
         Hello.setVisible(false);
         Start.setVisible(false);
@@ -54,7 +55,7 @@ public class SampleController {
 
     public void Stats(ActionEvent actionEvent) throws InterruptedException {
         if (Pause) {
-            takeStats.setText("Підрахуй");
+            takeStats.setText("Calculate income");
             if (!automate) {
                 action.setText(returnOrder);
             }
@@ -64,12 +65,9 @@ public class SampleController {
         }
         else  {
             returnOrder = action.getText();
-            action.setText("Оброблено замовлень: " + i + ", зароблено бабок: " + money + " гривень");
-            if(automate) {
-                action1.setText("А скільки за день пороблено хавки я навіть не збираюсь рахувати");
-            }
+            action.setText("Proceeded orders: " + i + ", received money: " + money + " $");
             Pause = true;
-            takeStats.setText("Продовжити працювати");
+            takeStats.setText("Continue to work");
             takeOrders.setDisable(true);
             alive = false;
         }
