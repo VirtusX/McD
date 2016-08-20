@@ -10,19 +10,19 @@
 
 <GridPane alignment="TOP_CENTER" style="-fx-border-color: black;" stylesheets="/sample/sample.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SampleController">
     <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="1">
-        <Button fx:id="Start" layoutX="1.0" layoutY="1.0" onAction="#start" prefWidth="138.0" text="Почати срану роботу" />
-        <Button fx:id="auto" layoutX="1.0" layoutY="1.0" onAction="#auto" prefWidth="138.0" text="Байдикувати" visible="false" />
-        <Button fx:id="takeStats" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="1.0" layoutY="1.0" onAction="#Stats" prefWidth="138.0" text="Підрахуй" visible="false" />
+        <Button fx:id="Start" layoutX="1.0" layoutY="1.0" onAction="#start" prefWidth="138.0" text="Start working" />
+        <Button fx:id="auto" layoutX="1.0" layoutY="1.0" onAction="#auto" prefWidth="138.0" text="Be a manager" visible="false" />
+        <Button fx:id="takeStats" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="1.0" layoutY="1.0" onAction="#Stats" prefWidth="138.0" text="Calculate income" visible="false" />
     </Pane>
     <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="2">
-        <Label fx:id="Hello" alignment="CENTER" contentDisplay="TOP" prefHeight="24.0" prefWidth="350.0" text="Тепер ти працюєш в макдональдсі. Змірісь">
+        <Label fx:id="Hello" alignment="CENTER" contentDisplay="TOP" prefHeight="24.0" prefWidth="350.0" text="Now you work in McD. Deal with it">
           <font>
               <Font size="14.0" />
           </font>
         </Label>
     </Pane>
     <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="3">
-        <Button fx:id="takeOrders" layoutX="1.0" layoutY="1.0" onAction="#orderAction" prefWidth="138.0" text="Прийняти заказ" visible="false" />
+        <Button fx:id="takeOrders" layoutX="1.0" layoutY="1.0" onAction="#orderAction" prefWidth="138.0" text="Be a cashier" visible="false" />
     </Pane>
     <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <Label fx:id="Cooks" layoutX="7.0" prefHeight="70.0" prefWidth="133.0" />
@@ -37,7 +37,7 @@
         <Label fx:id="Orders" layoutX="7.0" prefHeight="70.0" prefWidth="133.0" />
     </Pane>
     <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.rowIndex="2">
-        <Label fx:id="action1" alignment="CENTER" layoutX="6.0" prefHeight="70.0" prefWidth="344.0" textAlignment="CENTER" wrapText="true" />
+        <Label fx:id="action1" alignment="CENTER" prefHeight="70.0" prefWidth="350.0" textAlignment="CENTER" wrapText="true" />
     </Pane>
     <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="3" GridPane.rowIndex="2">
         <Label fx:id="OrdersQueue" layoutX="7.0" prefHeight="70.0" prefWidth="133.0" wrapText="true" />

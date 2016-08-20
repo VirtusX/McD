@@ -66,6 +66,9 @@ public class SampleController {
         else  {
             returnOrder = action.getText();
             action.setText("Proceeded orders: " + i + ", received money: " + money + " $");
+            if(automate) {
+                action1.setText("");
+            }
             Pause = true;
             takeStats.setText("Continue to work");
             takeOrders.setDisable(true);

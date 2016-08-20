@@ -95,9 +95,9 @@ class Cashier extends Thread {
                                 break;
                         }
                         if (nomer == 1)
-                            sp.action.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " uah. Have a nice day");
+                            sp.action.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " $. Have a nice day");
                         else
-                            sp.action1.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " uah. Have a nice day");
+                            sp.action1.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " $. Have a nice day");
                         if (lock.tryLock()) {
                             Cooking.remove(order.get(0));
                             order.remove(0);
