@@ -22,13 +22,16 @@ class Cashier extends Thread {
     }
 
 
-    synchronized String Manual() throws InterruptedException {
+    synchronized void Manual() throws InterruptedException {
+        sp.takeOrders.setDisable(true);
+        Thread.sleep(300);
         Platform.runLater(() -> {
             if (lock.tryLock()) {while (order.isEmpty() || Cooking.isEmpty()) {
             sp.action.setText("Чи ти кудись спішиш?");}
             while (!Cooking.contains(order.get(0))) {
             sp.action.setText("Заказ ще не зготували, не зли мене!");}
         }});
+        if (lock.tryLock())
         sp.i++;
         String ordered = order.get(0);
         double price = 0;
@@ -53,7 +56,7 @@ class Cashier extends Thread {
         Cooking.remove(order.get(0));
         order.remove(0);
         sp.money+=price;
-        return "Замовлення №"+sp.i+", "+ ordered+ ", виконано. З вас " +price+ " гривень. Ідіть нахуй";
+        sp.takeOrders.setDisable(false);
     }
 
     public void run() {

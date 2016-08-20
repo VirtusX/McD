@@ -8,17 +8,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static sample.Main.Cooking;
 
-/**
- * Created by x-13 on 09.08.2016.
- */
-
 class Cook extends Thread {
     private final Lock lock = new ReentrantLock();
     private SampleController sp;
     private String Name;
     private int number = 0;
 
-    public Cook(SampleController _sp, String i, int n) {
+    Cook(SampleController _sp, String i, int n) {
         sp = _sp;
         Name = i;
         number = n;
@@ -79,7 +75,7 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\n та пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
@@ -100,7 +96,7 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\n та пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
@@ -128,7 +124,7 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\n та пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
@@ -149,7 +145,7 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\n та пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
@@ -170,7 +166,7 @@ class Cook extends Thread {
                                     }
                                     if (n > 7) {
                                         try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\n та пішла покурити"));
+                                            Platform.runLater(() -> sp.CooksEvent.setText("Кухарка " + Name + " заїбалась\nта пішла покурити"));
                                             Thread.sleep(20000);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();

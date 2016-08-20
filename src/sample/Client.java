@@ -42,7 +42,7 @@ class Client extends Thread {
         Platform.runLater(() -> {
         if (lock.tryLock()) {
             i.add("картопля фрі");
-            sp.Orders.setText("Замовлена картопля фрі");
+            sp.Orders.setText("Замовлена\nкартопля фрі");
         }});
     }
 
@@ -94,7 +94,7 @@ class Client extends Thread {
                             if (order.size() < 10)
                                 sp.OrdersQueue.setText("В черзі " + order.size() + " заказів");
                             else
-                                sp.OrdersQueue.setText("В черзі вже хєрова туча заказів!\n Їх вже аж " + order.size() + "! Ану піздуй працювать!");
+                                sp.OrdersQueue.setText("В черзі вже хєрова туча заказів!\nЇх вже аж " + order.size() + "! Ану піздуй працювать!");
                         });
                         try {
                             Thread.sleep(7000);

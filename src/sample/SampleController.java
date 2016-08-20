@@ -27,7 +27,6 @@ public class SampleController {
     private Client doOrder3 = new Client(this);
     private Cashier doCash1 = new Cashier(this, 1);
     private Cashier doCash2 = new Cashier(this, 2);
-
     private boolean Pause = false;
     private String returnOrder = null;
 
@@ -38,12 +37,10 @@ public class SampleController {
         doCash1.Manual();
         takeStats.setVisible(true);
         auto.setVisible(false);
-        action1.setText("Тіки не клацай дюже швидко, бо ти ж не супермен, щоб кожну секунду когось нахуй посилати");
     }
 
     public void start(ActionEvent actionEvent) throws InterruptedException {
         action.setText("То ти будеш вже працювать, чи тіки байдики бити?");
-        action1.setText("Тіки підожди, коли хоча б трохи жрачки вже буде зроблено...");
         auto.setVisible(true);
         Hello.setVisible(false);
         Start.setVisible(false);

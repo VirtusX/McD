@@ -4,34 +4,55 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" stylesheets="/sample/sample.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SampleController">
-    <Button fx:id="auto" onAction="#auto" text="Байдикувати" visible="false" GridPane.columnIndex="1" />
-    <Button fx:id="takeOrders" onAction="#orderAction" text="Прийняти заказ" visible="false" GridPane.columnIndex="3" />
-    <Button fx:id="Start" onAction="#start" text="Почати срану роботу" GridPane.columnIndex="1" />
-    <Label fx:id="Hello" alignment="TOP_CENTER" prefHeight="200" prefWidth="350.0" text="Тепер ти працюєш в макдональдсі. Змірісь" GridPane.columnIndex="2" GridPane.rowIndex="2">
-      <font>
-         <Font size="14.0" />
-      </font></Label>
-    <Label fx:id="Cooks" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label fx:id="Orders" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-    <Label fx:id="action" alignment="TOP_CENTER" prefHeight="100" prefWidth="350" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-    <Label fx:id="OrdersQueue" prefHeight="100" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-    <Label fx:id="CooksEvent" prefHeight="100" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <Button fx:id="takeStats" onAction="#Stats" text="Підрахуй" visible="false" GridPane.columnIndex="1" />
-   <Label fx:id="action1" alignment="TOP_CENTER" layoutX="164.0" layoutY="105.0" prefHeight="100" prefWidth="350" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+<GridPane alignment="TOP_CENTER" style="-fx-border-color: black;" stylesheets="/sample/sample.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SampleController">
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="1">
+        <Button fx:id="Start" layoutX="1.0" layoutY="1.0" onAction="#start" prefWidth="138.0" text="Почати срану роботу" />
+        <Button fx:id="auto" layoutX="1.0" layoutY="1.0" onAction="#auto" prefWidth="138.0" text="Байдикувати" visible="false" />
+        <Button fx:id="takeStats" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="1.0" layoutY="1.0" onAction="#Stats" prefWidth="138.0" text="Підрахуй" visible="false" />
+    </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="2">
+        <Label fx:id="Hello" alignment="CENTER" contentDisplay="TOP" prefHeight="24.0" prefWidth="350.0" text="Тепер ти працюєш в макдональдсі. Змірісь">
+          <font>
+              <Font size="14.0" />
+          </font>
+        </Label>
+    </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="3">
+        <Button fx:id="takeOrders" layoutX="1.0" layoutY="1.0" onAction="#orderAction" prefWidth="138.0" text="Прийняти заказ" visible="false" />
+    </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <Label fx:id="Cooks" layoutX="7.0" prefHeight="70.0" prefWidth="133.0" />
+    </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Label fx:id="CooksEvent" layoutX="7.0" prefHeight="70.0" prefWidth="133.0" wrapText="true" />
+    </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <Label fx:id="action" alignment="CENTER" prefHeight="69.0" prefWidth="350" wrapText="true" />
+    </Pane>
+    <Pane prefHeight="112.0" prefWidth="140.0" style="-fx-border-color: Black;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+        <Label fx:id="Orders" layoutX="7.0" prefHeight="70.0" prefWidth="133.0" />
+    </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <Label fx:id="action1" alignment="CENTER" layoutX="6.0" prefHeight="70.0" prefWidth="344.0" textAlignment="CENTER" wrapText="true" />
+    </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;" GridPane.columnIndex="3" GridPane.rowIndex="2">
+        <Label fx:id="OrdersQueue" layoutX="7.0" prefHeight="70.0" prefWidth="133.0" wrapText="true" />
+    </Pane>
    <columnConstraints>
       <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints prefWidth="140.0" />
+      <ColumnConstraints prefWidth="350.0" />
+      <ColumnConstraints prefWidth="140.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
+      <RowConstraints prefHeight="30.0" />
+      <RowConstraints prefHeight="70.0" />
+      <RowConstraints prefHeight="70.0" />
       <RowConstraints />
    </rowConstraints>
+
 </GridPane>
