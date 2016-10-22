@@ -7,58 +7,56 @@ import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static sample.Main.order;
+import static sample.Main.ordersQueue;
 
 class Client extends Thread {
 
+    private final Lock lock = new ReentrantLock();
     private SampleController sp;
-
 
     Client(SampleController _sp)
     {
         sp = _sp;
     }
 
-    private final Lock lock = new ReentrantLock();
-
-    private void orderHamburger(List<String> i) {
+    private void orderHamburger(List<String> order) {
         Platform.runLater(() -> {
             if (lock.tryLock()) {
-                i.add("hamburger");
-                sp.Orders.setText("Hamburger ordered");
+                order.add("hamburger");
+                sp.newOrderEvent.setText("Hamburger ordered");
             }
         });
     }
 
-    private void orderSandwich(List<String> i) {
+    private void orderSandwich(List<String> order) {
         Platform.runLater(() -> {
             if (lock.tryLock()) {
-                i.add("cheeseburger");
-                sp.Orders.setText("Cheeseburger ordered");
+                order.add("cheeseburger");
+                sp.newOrderEvent.setText("Cheeseburger ordered");
             }});
     }
 
-    private void orderFry(List<String> i) {
+    private void orderFry(List<String> order) {
         Platform.runLater(() -> {
             if (lock.tryLock()) {
-                i.add("french fries");
-                sp.Orders.setText("French fries\nordered");
+                order.add("french fries");
+                sp.newOrderEvent.setText("French fries\nordered");
             }});
     }
 
-    private void orderNuggets(List<String> i) {
+    private void orderNuggets(List<String> order) {
         Platform.runLater(() -> {
             if (lock.tryLock()) {
-                i.add("mcNuggets");
-                sp.Orders.setText("McNuggets ordered");
+                order.add("mcNuggets");
+                sp.newOrderEvent.setText("McNuggets ordered");
             }});
     }
 
-    private void orderMuffin(List<String>i){
+    private void orderMuffin(List<String> order) {
         Platform.runLater(() -> {
             if (lock.tryLock()) {
-                i.add("muffin");
-                sp.Orders.setText("Muffin ordered");
+                order.add("muffin");
+                sp.newOrderEvent.setText("Muffin ordered");
             }});
     }
 
@@ -75,33 +73,33 @@ class Client extends Thread {
                 while (sp.alive) {
                     switch (rand.nextInt(5)) {
                         case 0:
-                            this.orderHamburger(order);
+                            this.orderHamburger(ordersQueue);
                             break;
                         case 1:
-                            this.orderSandwich(order);
+                            this.orderSandwich(ordersQueue);
                             break;
                         case 2:
-                            this.orderFry(order);
+                            this.orderFry(ordersQueue);
                             break;
                         case 3:
-                            this.orderNuggets(order);
+                            this.orderNuggets(ordersQueue);
                             break;
                         case 4:
-                            this.orderMuffin(order);
+                            this.orderMuffin(ordersQueue);
                             break;
                     }
                     Platform.runLater(() -> {
-                        if (order.size() < 10)
-                            sp.OrdersQueue.setText("The queue of " + order.size() + " orders");
+                        if (ordersQueue.size() < 10)
+                            sp.countOrdersEvent.setText("The queue of " + ordersQueue.size() + " orders");
                         else
-                            sp.OrdersQueue.setText("Too many orders in the queue!\nAs many as " + order.size() + "! Get to work!");
+                            sp.countOrdersEvent.setText("Too many orders in the queue!\nAs many as " + ordersQueue.size() + "! Get to work!");
                     });
                     try {
                         Thread.sleep(7000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }
+                } 
             }
             try {
                 Thread.sleep(300);

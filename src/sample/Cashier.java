@@ -5,37 +5,96 @@ import javafx.application.Platform;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static sample.Main.Cooking;
-import static sample.Main.order;
+import static sample.Main.foodQueue;
+import static sample.Main.ordersQueue;
 
 class Cashier extends Thread {
 
-
-    private SampleController sp;
-
-    private int nomer = 0;
+    private static final String ORDER_DONE = "Order №%d, %s, executed.\nYou have to pay %s $. Have a nice day";
     private final Lock lock = new ReentrantLock();
-    Cashier(SampleController _sp, int num)
+    private SampleController sp;
+    private int number;
+
+    Cashier(SampleController _sp, int number)
     {
         sp = _sp;
-        nomer = num;
+        this.number = number;
     }
 
-
-    synchronized void Manual() throws InterruptedException {
+    synchronized void TakeOrder() throws InterruptedException {
         sp.takeOrders.setDisable(true);
         Thread.sleep(300);
         Platform.runLater(() -> {
-            if (lock.tryLock()) {while (order.isEmpty() || Cooking.isEmpty()) {
-                sp.action.setText("Wait for orders!");}
-                while (!Cooking.contains(order.get(0))) {
-                    sp.action.setText("We have not cooked it yet!");}
+            if (lock.tryLock()) {
+                while (ordersQueue.isEmpty() || foodQueue.isEmpty()) {
+                    sp.cashierWorkEvent1.setText("Wait for orders!");
+                }
+                while (!foodQueue.contains(ordersQueue.get(0))) {
+                    sp.cashierWorkEvent1.setText("We have not cooked it yet!");
+                }
             }});
         if (lock.tryLock())
-            sp.i++;
-        String ordered = order.get(0);
+            sp.orderNumber++;
+        String ordered = ordersQueue.get(0);
+        double price = pay(ordered);
+        sp.cashierWorkEvent1.setText(String.format(ORDER_DONE, sp.orderNumber, ordered, price));
+        foodQueue.remove(ordersQueue.get(0));
+        ordersQueue.remove(0);
+        sp.money+=price;
+        sp.takeOrders.setDisable(false);
+    }
+
+    public void run() {
+        while (!currentThread().isInterrupted()) {
+            System.out.print("Cashier" + this.toString()+ "alive is " + sp.alive+"\n");
+            while (sp.alive) {
+                try {
+                    sleep(number * 2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                while (sp.alive) {
+                    while (ordersQueue.isEmpty() || foodQueue.isEmpty()) {
+                    }
+                    while (!foodQueue.contains(ordersQueue.get(0))) {
+                    }
+                    sp.orderNumber++;
+                    Platform.runLater(() -> {
+                        String ordered = ordersQueue.get(0);
+                        double price = pay(ordered);
+                        if (number == 1)
+                            sp.cashierWorkEvent1.setText(String.format(ORDER_DONE, sp.orderNumber, ordered, price));
+                        else
+                            sp.cashierWorkEvent2.setText(String.format(ORDER_DONE, sp.orderNumber, ordered, price));
+                        if (lock.tryLock()) {
+                            foodQueue.remove(ordersQueue.get(0));
+                            ordersQueue.remove(0);
+                        }
+                        sp.money += price;
+                    });
+                    try {
+                        sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } 
+                }
+            }
+            try {
+                sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            Thread.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private double pay(String ordered) {
         double price = 0;
-        switch (ordered){
+        switch (ordered) {
             case "hamburger":
                 price = 10.00;
                 break;
@@ -52,76 +111,7 @@ class Cashier extends Thread {
                 price = 20.00;
                 break;
         }
-        sp.action.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " $. Have a nice day");
-        Cooking.remove(order.get(0));
-        order.remove(0);
-        sp.money+=price;
-        sp.takeOrders.setDisable(false);
-    }
-
-    public void run() {
-        while (!currentThread().isInterrupted()) {
-            System.out.print("Cashier" + this.toString()+ "alive is " + sp.alive+"\n");
-            while (sp.alive) {
-                try {
-                    sleep(nomer*2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                while (sp.alive) {
-                    while (order.isEmpty() || Cooking.isEmpty()) {
-                    }
-                    while (!Cooking.contains(order.get(0))) {
-                    }
-                    sp.i++;
-                    Platform.runLater(() -> {
-                        String ordered = order.get(0);
-                        double price = 0;
-                        switch (ordered) {
-                            case "hamburger":
-                                price = 10.00;
-                                break;
-                            case "cheeseburger":
-                                price = 12.00;
-                                break;
-                            case "french fries":
-                                price = 9.00;
-                                break;
-                            case "mcNuggets":
-                                price = 11.00;
-                                break;
-                            case "muffin":
-                                price = 20.00;
-                                break;
-                        }
-                        if (nomer == 1)
-                            sp.action.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " $. Have a nice day");
-                        else
-                            sp.action1.setText("Orders №" + sp.i + ", " + ordered + ", executed.\nYou have to pay " + price + " $. Have a nice day");
-                        if (lock.tryLock()) {
-                            Cooking.remove(order.get(0));
-                            order.remove(0);
-                        }
-                        sp.money += price;
-                    });
-                    try {
-                        sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            try {
-                sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            Thread.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        return price;
     }
 }
 

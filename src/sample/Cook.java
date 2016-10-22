@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static sample.Main.Cooking;
+import static sample.Main.foodQueue;
 
 class Cook extends Thread {
     private final Lock lock = new ReentrantLock();
@@ -50,7 +50,6 @@ class Cook extends Thread {
     public void run() {
         int n = 0;
         while (!currentThread().isInterrupted()) {
-            //System.out.print("Cook" + this.toString()+ "alive is " + sp.alive+"\n");
             while (sp.alive) {
                 try {
                     Thread.sleep(number * 2000);
@@ -64,46 +63,16 @@ class Cook extends Thread {
                             }
                             switch (i) {
                                 case 0:
-                                    this.doHamburger(Cooking);
+                                    this.doHamburger(foodQueue);
                                     n++;
-                                    System.out.print(Name+" "+n+"\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
-                                    try {
-                                        Thread.sleep(3000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (n > 7) {
-                                        try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
-                                            Thread.sleep(20000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
-                                        n = 0;
-                                    }
+                                    cooking(n);
+                                    n = n > 7 ? 0 : n;
                                     break;
                                 case 1:
-                                    this.doFry(Cooking);
+                                    this.doFry(foodQueue);
                                     n++;
-                                    System.out.print(Name+" "+n+"\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
-                                    try {
-                                        Thread.sleep(3000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (n > 7) {
-                                        try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
-                                            Thread.sleep(20000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
-                                        n = 0;
-                                    }
+                                    cooking(n);
+                                    n = n > 7 ? 0 : n;
                                     break;
                             }
                         }
@@ -113,70 +82,25 @@ class Cook extends Thread {
                             }
                             switch (i) {
                                 case 0:
-                                    this.doSandwich(Cooking);
+                                    this.doSandwich(foodQueue);
                                     n++;
-                                    System.out.print(Name + " " + n + "\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
-                                    try {
-                                        Thread.sleep(3000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (n > 7) {
-                                        try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
-                                            Thread.sleep(20000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
-                                        n = 0;
-                                    }
+                                    cooking(n);
+                                    n = n > 7 ? 0 : n;
                                     break;
                                 case 1:
-                                    this.doNuggets(Cooking);
+                                    this.doNuggets(foodQueue);
                                     n++;
-                                    System.out.print(Name + " " + n + "\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
-                                    try {
-                                        Thread.sleep(3000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (n > 7) {
-                                        try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
-                                            Thread.sleep(20000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
-                                        n = 0;
-                                    }
+                                    cooking(n);
+                                    n = n > 7 ? 0 : n;
                                     break;
                                 case 2:
-                                    this.doMuffin(Cooking);
+                                    this.doMuffin(foodQueue);
                                     n++;
-                                    System.out.print(Name + " " + n + "\n");
-                                    Platform.runLater(() -> sp.Cooks.setText("Made food: " + Cooking.size()));
-                                    try {
-                                        Thread.sleep(3000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (n > 7) {
-                                        try {
-                                            Platform.runLater(() -> sp.CooksEvent.setText(Name + " went to the break"));
-                                            Thread.sleep(20000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        Platform.runLater(() -> sp.CooksEvent.setText(Name + " returned"));
-                                        n = 0;
-                                    }
+                                    cooking(n);
+                                    n = n > 7 ? 0 : n;
                                     break;
                             }
-                        }
+                        } 
                     }
                 }
             }
@@ -185,6 +109,25 @@ class Cook extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void cooking(int n) {
+        System.out.print(Name + " " + n + "\n");
+        Platform.runLater(() -> sp.cookingEvent.setText("Made food: " + foodQueue.size()));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (n > 7) {
+            try {
+                Platform.runLater(() -> sp.cooksRestEvent.setText(Name + " went to the break"));
+                Thread.sleep(20000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(() -> sp.cooksRestEvent.setText(Name + " returned"));
         }
     }
 }

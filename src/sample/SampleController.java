@@ -7,19 +7,24 @@ import javafx.scene.control.Label;
 
 public class SampleController {
 
-    public Button Start;
-    public Label action;
-    public Button takeOrders;
-    public Label Cooks;
-    public Label Orders;
-    public Label OrdersQueue;
-    public Label CooksEvent;
-    public Label Hello;
+    public Button cashierStartButton;
     public Button takeStats;
-    public Button auto;
-    public Label action1;
+    public Button managerButton;
+    public Button takeOrders;
+
+    public Label startMessage;
+    public Label cashierWorkEvent1;
+    public Label cashierWorkEvent2;
+    public Label newOrderEvent;
+    public Label countOrdersEvent;
+    public Label cookingEvent;
+    public Label cooksRestEvent;
+
     boolean alive = true;
+    int orderNumber = 0;
+    int money = 0;
     private boolean automate = false;
+    private boolean Pause = false;
     private Cook doCook1 = new Cook(this, "Cook №1",1);
     private Cook doCook2 = new Cook(this, "Cook №2",2);
     private Client doOrder1 = new Client(this);
@@ -27,24 +32,20 @@ public class SampleController {
     private Client doOrder3 = new Client(this);
     private Cashier doCash1 = new Cashier(this, 1);
     private Cashier doCash2 = new Cashier(this, 2);
-    private boolean Pause = false;
     private String returnOrder = null;
 
-    int i = 0;
-    int money = 0;
-
     public void orderAction(ActionEvent actionEvent) throws InterruptedException {
-        takeOrders.setText("Take order");
-        doCash1.Manual();
+        takeOrders.setText("Take ordersQueue");
+        doCash1.TakeOrder();
         takeStats.setVisible(true);
-        auto.setVisible(false);
+        managerButton.setVisible(false);
     }
 
     public void start(ActionEvent actionEvent) throws InterruptedException {
-        action.setText("Choose your path");
-        auto.setVisible(true);
-        Hello.setVisible(false);
-        Start.setVisible(false);
+        cashierWorkEvent1.setText("Choose your path");
+        managerButton.setVisible(true);
+        startMessage.setVisible(false);
+        cashierStartButton.setVisible(false);
         takeOrders.setVisible(true);
         doCook1.start();
         doCook2.start();
@@ -57,17 +58,17 @@ public class SampleController {
         if (Pause) {
             takeStats.setText("Calculate income");
             if (!automate) {
-                action.setText(returnOrder);
+                cashierWorkEvent1.setText(returnOrder);
             }
             Pause = false;
             takeOrders.setDisable(false);
             alive = true;
         }
         else  {
-            returnOrder = action.getText();
-            action.setText("Proceeded orders: " + i + ", received money: " + money + " $");
+            returnOrder = cashierWorkEvent1.getText();
+            cashierWorkEvent1.setText("Proceeded orders: " + orderNumber + ", received money: " + money + " $");
             if(automate) {
-                action1.setText("");
+                cashierWorkEvent2.setText("");
             }
             Pause = true;
             takeStats.setText("Continue to work");
@@ -80,7 +81,7 @@ public class SampleController {
     public void auto(ActionEvent actionEvent) {
         takeOrders.setVisible(false);
         takeStats.setVisible(true);
-        auto.setVisible(false);
+        managerButton.setVisible(false);
         doCash1.start();
         doCash2.start();
         automate = true;

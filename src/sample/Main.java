@@ -12,8 +12,13 @@ import java.util.List;
 import static java.util.Collections.synchronizedList;
 
 public class Main extends Application {
-    static List<String> Cooking = synchronizedList(new ArrayList<String>());
-    static List<String> order = synchronizedList(new ArrayList<String>());
+    static List<String> foodQueue = synchronizedList(new ArrayList<String>());
+    static List<String> ordersQueue = synchronizedList(new ArrayList<String>());
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -21,11 +26,5 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 632, 165));
         primaryStage.show();
         primaryStage.setOnCloseRequest(we -> System.exit(0));
-
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
